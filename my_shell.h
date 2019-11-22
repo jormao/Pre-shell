@@ -7,7 +7,9 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
 
 int words_in_string(char *str, char *delim);
 char **split_string(char *str, char *delim);
+int _fork(char **arr);
 #endif /* _MY_SHELL */
