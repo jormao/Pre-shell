@@ -1,6 +1,15 @@
 #include "my_shell.h"
 
-int main(int argc, char **argv, char** envp)
+/**
+ * main - evaluate if there is a input and proccess an output
+ * @argc: don't used
+ * @argv: arguments to proccess
+ * @envp: array whit enviroment
+ * 
+ * Return: always 0
+ */
+
+int main(int argc, char **argv, char **envp)
 {
 	char *buffer = NULL, **array_words, *env, **concat_words;
 	size_t buffer_size = 0;
@@ -65,31 +74,4 @@ int main(int argc, char **argv, char** envp)
 	free(buffer);
         return (0);
 }
-
-
-int _fork(char **arr)
-{
-	int status;
-	pid_t pid;
-	switch (pid = fork())
-	{
-		case -1:
-			perror("Error");
-			exit(-1);
-			break;
-		case 0:
-			if (execve(arr[0], arr, NULL) == -1)
-			{
-				perror("Error");
-				return (0);
-			}
-			break;
-		default:
-			do
-				waitpid(pid, &status, WUNTRACED);
-			while (WIFEXITED(status) == 0 && WIFSIGNALED(status) == 0);
-			break;
-	}
-return (0);
-}
-
+ 

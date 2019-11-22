@@ -18,17 +18,19 @@ int words_in_string(char *str, char *delim)
 	while (temp[i])
 	{
 		if (temp[i] == delim[0])
-        	cd++;
+			cd++;
 		i++;
 	}
 
-    return (cd + 1);
+	return (cd + 1);
 }
 
 /**
   * split_string - Extract tokens from strings
+  * @str: string to token
+  * @delim: delims to separate words
   *
-  * Return: Always zero
+  * Return: array whit words tokenized
   */
 
 char **split_string(char *str, char *delim)
@@ -44,16 +46,14 @@ char **split_string(char *str, char *delim)
 	}
 
 	count_words = words_in_string(str, delim);
-    buffer = malloc(sizeof(char) * (strlen(str) + 1));
-    if (!buffer)
-    	return (NULL);
-
+	buffer = malloc(sizeof(char) * (strlen(str) + 1));
+	if (!buffer)
+		return (NULL);
 	words = malloc(sizeof(char *) * (count_words + 1));
 	if (!words)
-    	return (NULL);
-
-    strcpy(buffer, str);
-    token = strtok(buffer, delim);
+		return (NULL);
+	strcpy(buffer, str);
+	token = strtok(buffer, delim);
 
 	while (token)
 	{
@@ -62,11 +62,9 @@ char **split_string(char *str, char *delim)
 		{
 			for (aux = i; aux >= 0; aux--)
 				free(words[aux]);
-
 			free(words);
 			return (NULL);
 		}
-
 		strcpy(words[i], token);
 		token = strtok(NULL, delim);
 		i++;
