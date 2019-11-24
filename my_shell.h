@@ -12,4 +12,5 @@
 int words_in_string(char *str, char *delim);
 char **split_string(char *str, char *delim);
 int _fork(char **arr);
+void sig_handler (int sig);
 #endif /* _MY_SHELL */
