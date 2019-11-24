@@ -13,4 +13,11 @@ int words_in_string(char *str, char *delim);
 char **split_string(char *str, char *delim);
 int _fork(char **arr);
 void sig_handler (int sig);
+char *found_path (char **envp);
+int _strlen(char *s);
+char *_strcpy(char *dest, char *src);
+int _strncmp(char *s1, char *s2, int n);
+char *_strcat(char *dest, char *src);
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+
 #endif /* _MY_SHELL */
