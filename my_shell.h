@@ -18,6 +18,8 @@ int _strlen(char *s);
 char *_strcpy(char *dest, char *src);
 int _strncmp(char *s1, char *s2, int n);
 char *_strcat(char *dest, char *src);
+int _strcmp(char *s1, char *s2);
+void print_env(char **envp);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 
 #endif /* _MY_SHELL */
