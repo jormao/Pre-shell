@@ -4,12 +4,18 @@ The shell is a program that presents a command line interface that allows you to
 
 Used prototypes and their variables
 
-
-
-
-
-
-
+int words_in_string(char *str, char *delim);
+char **split_string(char *str, char *delim);
+int _fork(char **arr);
+void sig_handler (int sig);
+char *found_path (char **envp);
+int _strlen(char *s);
+char *_strcpy(char *dest, char *src);
+int _strncmp(char *s1, char *s2, int n);
+char *_strcat(char *dest, char *src);
+int _strcmp(char *s1, char *s2);
+void print_env(char **envp);
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 
 In addition to commands, shells offer other elements to improve their functionality, such as variables, functions or control structures. The set of commands and elements available, as well as their syntax, will depend on the particular shell used.
 
