@@ -1,0 +1,171 @@
+.TH SHELL - man Holbi page
+
+.SH NAME
+
+.SB simple shell
+Interprete de comandos.
+
+.SH SYNOPSIS
+
+.B #include ".h"
+
+.B OJO PENDIENTE PROTOTIPO
+
+.SH DESCRIPTION
+
+A program that takes commands from the keyboard and executes them from a terminal or a file.
+
+
+.B Return value
+
+Command to end the function and return the value provided to the call section of the shell script.
+
+
+.B Commands
+
+The command is a sequence of words or tokens separated by delimiters. The first word specifies the name 
+of the command to be executed. The remaining words are passed as arguments to the summoned command.
+The command name is passed as an argument.
+
+.B Command ls
+Lists files and folders in the current directory
+
+.b Parameters
+-l, -a, -A, -F, -h, -i, -S, -r, -R, -t, -u, -x, -i.
+
+.SH EXAMPLE
+# ls -l
+
+total 12
+-rw-r--r-- 1 root root  100 apr  6 21:19 file.txt
+drwxr-xr-x 3 root root 4096 apr  7 01:44 file2
+drwxr-xr-x 2 root root 4096 apr  6 22:19 file3
+
+.B Command cd
+Changes the working in process directory to the directory you specify.
+
+Its syntax is the form:
+cd [directory]
+
+cd without parameters changes to the user's default working directory (set in the HOME variable).
+
+cd.. changes to the directory a lower level than the current one (if it was in /home/pepepe/ now I will be in /home).
+
+cd /home/pepepe/Desktop changes to the working directory /home/pepe/Desktop
+
+cd - changes to the previous working directory (the one in the OLDPWD variable).
+
+.SH EXAMPLE
+root@kali:~# cd ejemplos/carpeta2
+root@kali:~/ejemplos/carpeta2# pwd
+/root/ejemplos/carpeta2
+
+.B Command mv
+Move the Source to the target by removing the source.
+Parameters
+-i
+Interactive mode indicates that you wait for confirmation if there are files in the destination that can be overwritten.
+
+.SH EXAMPLE
+mv Solvetic1.docx Solvetic2.docx
+
+.B Command rm
+Deletes each file specified on the command line.
+
+.SH EXAMPLE
+rm myfile.txt
+rm -f myfile.txt
+
+.B Command mkdir
+Creates a new directory.
+
+.SH EXAMPLE
+mkdir newDir
+
+.B Command rmdir
+Delete a directory.
+
+.SH EXAMPLE
+rmdir newDir/
+
+.B Command chown
+Changes the owner of the file or directory.
+
+.SH EXAMPLE
+chown newuser file1
+
+.B Command chmod
+
+Changes the permissions of a file or directory.
+Parameters
+The mode consists of 3 parts. owner, groups, and others this refers to the permissions for these modes and you must specify them.
+
+.SH EXAMPLE
+chmod a=rwx file.txt
+Assign all permissions to all users for the file file.txt. 
+
+.B Command cat
+Displays the contents of a file on the screen without limits.
+
+.SH EXAMPLE
+cat > filename.txt
+
+.B Command grep
+Searches for a string in the specified files and shows which lines contain the specified string.
+
+.SH EXAMPLE
+$ grep [options] patron [file]
+
+
+.B Environment
+The environment is a list of name-value pairs that is passed to an executed program in the same way as a normal argument list; see exec(2) and environ(5). The shell interacts with the environment in several ways. On invocation, the shell scans the environment and creates a parameter for each name found, giving it the corresponding value. Executed commands inherit the same environment. If the user modifies the values of these parameters or creates new ones, none of these affects the environment unless the export command is used to bind the shell's parameter to the environment. The environment seen by any executed command is thus composed of any unmodified name-value pairs originally inherited by the shell, plus any modifications or additions, all of which must be noted in export commands.
+The environment for any simple-command may be augmented by prefixing it with one or more assignments to parameters. Thus these two lines are equivalent
+
+If the -k flag is set, all keyword arguments are placed in the environment, even if the occur after the command name. The following prints 'a=b c' and 'c':
+
+echo a=b c
+set -k
+echo a=b c
+
+.B Signals
+
+The INTERRUPT and QUIT signals for an invoked command are ignored if the command is followed by & (unless job control is enabled); otherwise signals have the values inherited by the shell from its parent. (But see also trap.)
+    Execution
+Each time a command is executed the above substitutions are carried out. The shell then first looks if a function with the command name was defined; if so, it is chosen for execution. Otherwise, except for the 'special commands' listed below a new process is created and an attempt is made to execute the command via an exec(2).
+
+
+.B Invocation
+If the first character of argument zero is -, commands are read from /etc/profile and $HOME/.profile, if the respective file exists.
+Commands are then read as described below. The following flags are interpreted by the shell when it is invoked.
+-c string	If the -c flag is present then commands are read from string.
+-s	If the -s flag is present or if no arguments remain then commands are read from the standard input. Shell output is written to file 		descriptor 2.
+-i	If the -i flag is present or if the shell input and output are attached to a terminal (as told by isatty(3)) then this shell is 	interactive. In this case the terminate signal SIGTERM (see signal(2)) is ignored (so that 'kill 0' does not kill an interactive 	shell) 		and the interrupt signal SIGINT is caught and ignored (so that wait is interruptable). In all cases SIGQUIT is ignored by the shell.
+	The remaining flags and arguments are described under the set command.
+
+
+
+.SH FILES
+/etc/profile
+$HOME/.profile
+/tmp/sh*
+/dev/null
+
+.SH Errors
+Errors detected by the shell, such as syntax errors or fatal errors in special commands, cause the shell to return a non zero exit status.
+If the shell is being used non interactively then execution of the shell file is abandoned. Otherwise, the shell returns 
+the exit status of the last command executed.
+
+
+
+.SH BUGS 
+
+No known bugs.
+
+
+.SH SEE ALSO 
+
+shell, bash.
+
+
+.SH AUTHOR
+Julian Catañeda, Jorge Salazar. 
