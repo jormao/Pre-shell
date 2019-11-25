@@ -21,5 +21,7 @@ char *_strcat(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
 void print_env(char **envp);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+int check_in_path(char **array_words, char *e_path);
+void free_function(char **double_point);
 
 #endif /* _MY_SHELL */

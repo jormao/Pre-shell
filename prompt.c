@@ -11,10 +11,10 @@
 
 int main(int argc, char **argv, char **envp)
 {
-    char *buffer = NULL, **array_words, *e_path = NULL, **concat_words, *exit_cm, *new_env;
+    char *buffer = NULL, **array_words, *e_path = NULL, *exit_cm, *new_env;
     size_t buffer_size = 0;
     ssize_t prints = 1;
-    int i = 0, words_to_free = 0, command_array = 0, flag = 0, tok_index, len_tok;
+    int i = 0, words_to_free = 0, flag = 0;
     struct stat find_command;
 
     (void)argc;
@@ -23,6 +23,7 @@ int main(int argc, char **argv, char **envp)
 	e_path = found_path(envp);
 	exit_cm = "exit";
 	new_env = "env";
+	
     while (prints > 0)
     {
 		signal(SIGINT, sig_handler);
@@ -62,24 +63,7 @@ int main(int argc, char **argv, char **envp)
 			}
 			else
 			{
-	    		concat_words = split_string(e_path, ":");
-	    		command_array = _strlen (array_words[0]);
-	    		tok_index = 0;
-	    		while (concat_words[tok_index])
-	    		{
-					len_tok = _strlen(concat_words[tok_index] + 2);
-					concat_words[tok_index] = realloc(concat_words[tok_index], sizeof(char) * (len_tok + command_array));
-					_strcat(concat_words[tok_index], "/");
-					_strcat(concat_words[tok_index], array_words[0]);
-					if (stat(concat_words[tok_index], &find_command) == 0)
-					{
-		    			array_words[0] = realloc(array_words[0], sizeof(char) * (len_tok + command_array));
-		    			_strcpy(array_words[0], concat_words[tok_index]);
-		    			flag = 1;
-		    			break;
-					}
-					tok_index++;
-	    		}
+				flag = check_in_path(array_words, e_path);
 			}	
 			if (flag == 1)
 	    		_fork(array_words);

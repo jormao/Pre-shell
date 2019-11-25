@@ -21,7 +21,7 @@ void sig_handler (int sig)
 
 char *found_path(char **envp)
 {
-	int i;
+	int i = 0;
 	char *env = NULL;
 
 	while (envp[i])
@@ -79,4 +79,21 @@ void print_env(char **envp)
 		write(STDOUT_FILENO, "\n", 1);
 		i++;
 	}
+}
+
+/**
+ * free_function - function to free pointer to pointer
+ * @double_point: pointer to pointer
+ * 
+ */
+
+void free_function(char **double_point)
+{
+	char**tmp = double_point;
+
+	if (!double_point)
+		return;
+	while (*double_point)
+		free(*double_point++);
+	free(tmp);
 }
