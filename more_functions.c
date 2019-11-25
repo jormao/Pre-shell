@@ -84,12 +84,12 @@ void print_env(char **envp)
 /**
  * free_function - function to free pointer to pointer
  * @double_point: pointer to pointer
- * 
+ *
  */
 
 void free_function(char **double_point)
 {
-	char**tmp = double_point;
+	char **tmp = double_point;
 
 	if (!double_point)
 		return;

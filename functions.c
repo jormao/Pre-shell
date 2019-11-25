@@ -46,7 +46,7 @@ char *_strcpy(char *dest, char *src)
  * @s2: second value to compare
  * @n: number of chars to compare
  *
- * Return: 0 if are equal, else other number 
+ * Return: 0 if are equal, else other number
  */
 int _strncmp(char *s1, char *s2, int n)
 {
