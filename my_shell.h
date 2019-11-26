@@ -10,7 +10,7 @@
 #include <sys/stat.h>
 
 /* functions in split_string.c: */
-int words_in_string(char *str, char *delim);
+int count_input(char *str);
 char **split_string(char *str, char *delim);
 void index_function(char *buffer, char **envp);
 int _atoi(char *s);

@@ -1,28 +1,29 @@
 #include "my_shell.h"
 
 /**
- * words_in_string - counts the words in the string
+ * count_input - counts the words in the string
  * @str: full string
- * @delim: character that separate the words
  *
  * Return: numbers of words
  */
 
-int words_in_string(char *str, char *delim)
+int count_input(char *str)
 {
-	int i = 0, cd = 0;
-	char *temp;
+	int i;
+	int count = 0;
+	int state = 0;
 
-	temp = str;
-
-	while (temp[i])
+	for (i = 0; str[i] != '\0'; i++)
 	{
-		if (temp[i] == delim[0])
-			cd++;
-		i++;
+		if (str[i] == ' ' || str[i] == '\n' || str[i] == '\t' || str[i] == ':')
+			state = 0;
+		else if (state == 0)
+		{
+			state = 1;
+			count++;
+		}
 	}
-
-	return (cd + 1);
+	return (count);
 }
 
 /**
@@ -45,19 +46,19 @@ char **split_string(char *str, char *delim)
 		j++;
 	}
 
-	count_words = words_in_string(str, delim);
-	buffer = malloc(sizeof(char) * (strlen(str) + 1));
+	count_words = count_input(str);
+	buffer = malloc(sizeof(char) * (_strlen(str) + 1));
 	if (!buffer)
 		return (NULL);
 	words = malloc(sizeof(char *) * (count_words + 1));
 	if (!words)
 		return (NULL);
-	strcpy(buffer, str);
+	_strcpy(buffer, str);
 	token = strtok(buffer, delim);
 
 	while (token)
 	{
-		words[i] = malloc(sizeof(char) * (strlen(token) + 1));
+		words[i] = malloc(sizeof(char) * (_strlen(token) + 1));
 		if (!words[i])
 		{
 			for (aux = i; aux >= 0; aux--)
@@ -65,7 +66,7 @@ char **split_string(char *str, char *delim)
 			free(words);
 			return (NULL);
 		}
-		strcpy(words[i], token);
+		_strcpy(words[i], token);
 		token = strtok(NULL, delim);
 		i++;
 	}
@@ -88,7 +89,7 @@ void index_function(char *buffer, char **envp)
 	struct stat find_command;
 
 	e_path = found_path(envp);
-	array_words = split_string(buffer, " ");
+	array_words = split_string(buffer, " \t");
 	if (!(_strcmp(array_words[0], "exit")))
 		flag = exit_function(array_words, buffer);
 	else if (array_words[0] == NULL)
@@ -148,7 +149,7 @@ int _atoi(char *s)
 
 int exit_function(char **array_words, char *buffer)
 {
-	int arg_exit = 0, len_exit = 0, flag = 0;
+	int arg_exit = 0, flag = 0, len_exit = 0;
 
 	if (array_words[1] == NULL || (!_strcmp(array_words[1], "0")))
 	{
