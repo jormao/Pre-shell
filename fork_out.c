@@ -7,7 +7,7 @@
  * Return: always 0
  */
 
-int _fork(char **arr)
+int _fork(char **arr, char **envp)
 {
 	int status;
 	pid_t pid;
@@ -19,7 +19,7 @@ int _fork(char **arr)
 			exit(-1);
 			break;
 		case 0:
-			if (execve(arr[0], arr, NULL) == -1)
+			if (execve(arr[0], arr, envp) == -1)
 			{
 				perror("Error");
 				return (0);
@@ -45,6 +45,7 @@ return (0);
 int check_in_path(char **arr_words, char *e_path)
 {
 	int flag = 0, len_tok, idx = 0, len_arr;
+	unsigned int new_size, old_size;
 	char **cat_words;
 	struct stat find_command;
 
@@ -54,12 +55,14 @@ int check_in_path(char **arr_words, char *e_path)
 	while (cat_words[idx])
 	{
 		len_tok = _strlen(cat_words[idx]) + 2;
-		cat_words[idx] = realloc(cat_words[idx], sizeof(char) * (len_tok + len_arr));
+		new_size = (sizeof(char) * (len_tok + len_arr));
+		old_size = (_strlen(cat_words[idx]) + 1);
+		cat_words[idx] = _realloc(cat_words[idx], old_size, new_size);
 		_strcat(cat_words[idx], "/");
 		_strcat(cat_words[idx], arr_words[0]);
 		if (stat(cat_words[idx], &find_command) == 0)
 		{
-			arr_words[0] = realloc(arr_words[0], sizeof(char) * (len_tok + len_arr));
+			arr_words[0] = _realloc(arr_words[0], (len_arr + 1), new_size);
 			_strcpy(arr_words[0], cat_words[idx]);
 			flag = 1;
 			break;

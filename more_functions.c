@@ -26,7 +26,7 @@ char *found_path(char **envp)
 
 	while (envp[i])
 	{
-		if (!strncmp("PATH", envp[i], 4))
+		if (!_strncmp("PATH", envp[i], 4))
 			env = envp[i] + 5;
 		i++;
 	}

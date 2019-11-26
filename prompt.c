@@ -53,7 +53,7 @@ int main(int argc, char **argv, char **envp)
 			else
 				flag = check_in_path(array_words, e_path);
 			if (flag == 1)
-				_fork(array_words);
+				_fork(array_words, envp);
 			else
 				perror("./hsh");
 			free_function(array_words);
