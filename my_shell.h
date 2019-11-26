@@ -12,6 +12,9 @@
 /* functions in split_string.c: */
 int words_in_string(char *str, char *delim);
 char **split_string(char *str, char *delim);
+void index_function(char *buffer, char **envp);
+int _atoi(char *s);
+int exit_function(char **array_words, char *buffer);
 /* functions in fork_out.c: */
 int _fork(char **arr, char **envp);
 int check_in_path(char **array_words, char *e_path);
